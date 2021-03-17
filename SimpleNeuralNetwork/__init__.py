@@ -1,0 +1,2 @@
+from SimpleNeuralNetwork.NeuralNetwork import NeuralNetwork
+from SimpleNeuralNetwork.activation_functions import *
