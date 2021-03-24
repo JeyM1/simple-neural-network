@@ -20,7 +20,8 @@ def main():
     def weights_init(x):
         return x * 0.1 + 0.1
 
-    nn.add_layer(6, activation_func=relu, activation_func_deriv=relu_deriv, neuron_weight_init=weights_init)
+    nn.add_layer(6, activation_func=activation_functions.relu,
+                 activation_func_deriv=activation_functions.relu_deriv, neuron_weight_init=weights_init)
     nn.add_layer(1)
     nn.train(inputs, outputs, 10000)
     print("Final weights:")
