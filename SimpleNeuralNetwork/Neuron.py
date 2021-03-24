@@ -3,8 +3,14 @@ from SimpleNeuralNetwork.activation_functions import *
 
 
 class Neuron:
-    def __init__(self, n_inputs, learning_spd=1, activation_func=sigmoid, activation_func_deriv=sigmoid_derivative):
-        self.weights = np.array([np.random.random() for i in range(n_inputs)])
+    def __init__(self,
+                 n_inputs,
+                 learning_spd=1,
+                 activation_func=sigmoid,
+                 activation_func_deriv=sigmoid_derivative,
+                 neuron_weight_init=lambda x: np.random.random()
+                 ):
+        self.weights = np.array([neuron_weight_init(i) for i in range(n_inputs)])
         self.saved = self.weights.copy()
         self.activation_func = activation_func
         self.activation_func_deriv = activation_func_deriv

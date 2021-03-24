@@ -15,10 +15,12 @@ def main():
                        [5.80, 1.37, 5.77]]) / 10
     outputs = np.array([4.37, 1.22, 4.29, 1.89, 4.51, 0.32, 5.80, 1.37, 5.77, 0.88]) / 10
 
-    nn = NeuralNetwork(3, learning_spd=.5)
-    # nn.add_layer(10, activation_func=relu, activation_func_deriv=relu_deriv)
-    nn.add_layer(10, activation_func=relu, activation_func_deriv=relu_deriv)
-    # nn.add_layer(10)
+    nn = NeuralNetwork(3, learning_spd=.1)
+
+    def weights_init(x):
+        return x * 0.1 + 0.1
+
+    nn.add_layer(6, activation_func=relu, activation_func_deriv=relu_deriv, neuron_weight_init=weights_init)
     nn.add_layer(1)
     nn.train(inputs, outputs, 10000)
     print("Final weights:")

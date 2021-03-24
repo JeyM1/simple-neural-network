@@ -9,14 +9,20 @@ class NeuralNetwork:
         self.layers = []
         self.n_inputs = n_inputs
 
-    def add_layer(self, neurons_count, activation_func=sigmoid, activation_func_deriv=sigmoid_derivative):
-        if not self.layers:
-            # initialize neurons with n_inputs
-            layer = [Neuron(self.n_inputs, self.learning_speed, activation_func, activation_func_deriv) for _ in
-                     range(neurons_count)]
-        else:
-            layer = [Neuron(len(self.layers[-1]), self.learning_speed, activation_func, activation_func_deriv) for _ in
-                     range(neurons_count)]
+    def add_layer(self,
+                  neurons_count,
+                  activation_func=sigmoid,
+                  activation_func_deriv=sigmoid_derivative,
+                  neuron_weight_init=lambda x: np.random.random()
+                  ):
+        n_inputs = self.n_inputs if not self.layers else len(self.layers[-1])
+        layer = [Neuron(n_inputs=n_inputs,
+                        learning_spd=self.learning_speed,
+                        activation_func=activation_func,
+                        activation_func_deriv=activation_func_deriv,
+                        neuron_weight_init=neuron_weight_init
+                        ) for _ in
+                 range(neurons_count)]
         self.layers.append(layer)
 
     def train(self, inputs, outputs, epochs=25000):
